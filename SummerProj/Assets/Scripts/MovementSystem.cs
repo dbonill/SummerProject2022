@@ -11,4 +11,11 @@ public class MovementSystem : MonoBehaviour
         //ObjRB.AddForce(directionVector * speed * Time.deltaTime, ForceMode2D.Force);
         CurrentPos.Translate(directionVector * speed * Time.deltaTime, Space.World);
     }
+
+    public void MoveObjToLeft(Transform Obj)
+    {
+        Obj.Translate(Obj.right * -1 * speed * Time.deltaTime, Space.World);
+    }
+
+
 }

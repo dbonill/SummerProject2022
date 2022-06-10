@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Obstacle : MovementSystem
 {
+    public Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -12,6 +13,6 @@ public class Obstacle : MovementSystem
 
     void FixedUpdate()
     {
-        MoveObjToLeft(transform);
+        MoveObjToLeft(rb);
     }
 }

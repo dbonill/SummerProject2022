@@ -12,9 +12,10 @@ public class MovementSystem : MonoBehaviour
         CurrentPos.Translate(directionVector * speed * Time.deltaTime, Space.World);
     }
 
-    public void MoveObjToLeft(Transform Obj)
+    public void MoveObjToLeft(Rigidbody2D ObjRB)
     {
-        Obj.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
+        //Obj.Translate(Vector2.left * speed * Time.deltaTime, Space.World);
+        ObjRB.AddForce(Vector2.left * speed * Time.deltaTime, ForceMode2D.Force);
     }
 
     public void ObjImpulseUp(Rigidbody2D ObjRB, float jumpForce)

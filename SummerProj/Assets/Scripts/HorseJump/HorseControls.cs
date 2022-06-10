@@ -42,9 +42,9 @@ public class HorseControls : MovementSystem
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        //gameover
     }
 
 

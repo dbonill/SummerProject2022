@@ -38,7 +38,7 @@ public class HorseControls : MovementSystem
     {
         checkIfGrounded();
 
-        if ((/*Input.touchCount > 0 ||*/ Input.GetKeyDown(Jump)) && isGrounded)
+        if ((Input.touchCount > 0 || Input.GetKeyDown(Jump)) && isGrounded)
         {
             ObjImpulseUp(rb, jumpForce);
         }

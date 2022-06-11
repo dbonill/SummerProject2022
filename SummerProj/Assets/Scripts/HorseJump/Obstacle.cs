@@ -5,6 +5,7 @@ using UnityEngine;
 public class Obstacle : MovementSystem
 {
     public Rigidbody2D rb;
+    public float destroyObjAfterXSeconds = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +16,10 @@ public class Obstacle : MovementSystem
     {
         MoveObjToLeft(rb);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject, destroyObjAfterXSeconds);
+    }
+
 }

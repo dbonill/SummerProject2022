@@ -13,6 +13,8 @@ public class HorseControls : MovementSystem
     public LayerMask Ground;
     public float distance = 1f;
 
+    public GameManagerHJ GameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +46,8 @@ public class HorseControls : MovementSystem
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //gameover
+        if(collision.gameObject.CompareTag("Obstacle"))
+            GameManager.EndGame();
     }
 
 

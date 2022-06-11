@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 [System.Serializable]
 public struct Obstacles
@@ -31,8 +33,41 @@ public class GameManagerHJ : MonoBehaviour
     public List<Transform> SpawnPoints;
 
     [Header("Score")]
+    public TextMeshProUGUI ScoreText;
     public int CurrentScore = 0;
+    public float timeSurvived = 0f;
 
+    [Header("Start/End Game")]
+    public GameObject startButton;
+    public GameObject restartButton;
+    public GameObject gameOverText;
+    public GameObject nameOfMiniGame;
+    public string LoadSceneOnGameOver;
+
+
+    //Start/End/Reset Game
+    public bool startGame = false;
+
+    public void StartGame()
+    {
+        Time.timeScale = 1f;
+        startButton.SetActive(false);
+        nameOfMiniGame.SetActive(false);
+        startGame = true;
+    }
+
+    public void EndGame()
+    {
+        Time.timeScale = 0f;
+        restartButton.SetActive(true);
+        gameOverText.SetActive(true);
+        GameOver = true;
+    }
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene(LoadSceneOnGameOver);
+    }
 
     //Save System
 
@@ -75,12 +110,29 @@ public class GameManagerHJ : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        spawnObstacleTimer = startSpawnObstacle;
+        Time.timeScale = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        ObstacleSpawnTimers();
+        //Time Alive
+        if (!GameOver && startGame) //need to add pause
+        {
+            timeSurvived += Time.deltaTime;
+            ObstacleSpawnTimers();
+        }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Obstacle"))
+        {
+            CurrentScore++;
+            ScoreText.text = "SCORE: " + CurrentScore;
+        }
+    }
+
+
 }

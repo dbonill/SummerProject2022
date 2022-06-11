@@ -5,6 +5,8 @@ using UnityEngine;
 public class HorseControls : MovementSystem
 {
     public float jumpForce = 5f;
+    public float jumpCoolDown = 0.1f;
+    float jumpCoolDownTimer = 0;
     public KeyCode Jump = KeyCode.Space;
     public bool isGrounded = true;
 
@@ -15,10 +17,12 @@ public class HorseControls : MovementSystem
 
     public GameManagerHJ GameManager;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        jumpCoolDownTimer = jumpCoolDown;
     }
 
     private void OnDrawGizmosSelected()
@@ -32,16 +36,31 @@ public class HorseControls : MovementSystem
         isGrounded = Physics2D.Raycast(transform.position, groundChecker.position - transform.position, distance, Ground);
     }
 
+    void ResetJumpCoolDown()
+    {
+        jumpCoolDownTimer = jumpCoolDown;
+    }
+
+    void SubtractJumpCoolDownTimers()
+    {
+        if(jumpCoolDownTimer > 0)
+            jumpCoolDownTimer -= Time.deltaTime;
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         checkIfGrounded();
 
-        if ((Input.touchCount > 0 || Input.GetKeyDown(Jump)) && isGrounded)
+        if ((Input.touchCount > 0 || Input.GetKeyDown(Jump)) && isGrounded && GameManager.startGame && jumpCoolDownTimer <= 0)
         {
             ObjImpulseUp(rb, jumpForce);
+            ResetJumpCoolDown();
         }
+        SubtractJumpCoolDownTimers();
+
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

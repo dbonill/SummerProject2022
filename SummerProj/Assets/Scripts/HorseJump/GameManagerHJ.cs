@@ -37,6 +37,13 @@ public class GameManagerHJ : MonoBehaviour
     public int CurrentScore = 0;
     public float timeSurvived = 0f;
 
+    [Header("Difficulty")]
+    public int everyXScoreMakeGameHarder = 10;
+    public float makeGameHarderByXTime = 1f;
+    public float speedMultiplyerBonus = 1f;
+    public float addToSpeedBonus = 0.3f;
+
+
     [Header("Start/End Game")]
     public GameObject startButton;
     public GameObject restartButton;
@@ -71,6 +78,19 @@ public class GameManagerHJ : MonoBehaviour
 
     //Save System
 
+    //Difficulty
+    void MakeGameHarder()
+    {
+        if (CurrentScore % everyXScoreMakeGameHarder == 0 && timeSurvived > endSpawnObstacle)
+        {
+            if (endSpawnObstacle - makeGameHarderByXTime >= startSpawnObstacle)
+            {
+                endSpawnObstacle = endSpawnObstacle - makeGameHarderByXTime;
+                speedMultiplyerBonus += addToSpeedBonus;
+            }
+        }
+    }
+
     //Spawn Obstacle Functions
     void ObstacleSpawner()
     {
@@ -80,15 +100,13 @@ public class GameManagerHJ : MonoBehaviour
         if (ObstaclesToSpawn[indexToSpawn].startHigh)
         {
             var go = Instantiate(ObstaclesToSpawn[indexToSpawn].Obstacle, SpawnPoints[1].position, Quaternion.identity);
-            go.GetComponent<MovementSystem>().speed = ObstaclesToSpawn[indexToSpawn].Speed;
+            go.GetComponent<MovementSystem>().speed = ObstaclesToSpawn[indexToSpawn].Speed * speedMultiplyerBonus;
         }
         else
         {
             var go = Instantiate(ObstaclesToSpawn[indexToSpawn].Obstacle, SpawnPoints[0].position, Quaternion.identity);
-            go.GetComponent<MovementSystem>().speed = ObstaclesToSpawn[indexToSpawn].Speed;
+            go.GetComponent<MovementSystem>().speed = ObstaclesToSpawn[indexToSpawn].Speed * speedMultiplyerBonus;
         }
-
-
 
     }
 
@@ -98,7 +116,9 @@ public class GameManagerHJ : MonoBehaviour
             return;
         if (spawnObstacleTimer <= 0)
         {
+            //batch spawns?
             ObstacleSpawner();
+            MakeGameHarder();
         }
         else
         {

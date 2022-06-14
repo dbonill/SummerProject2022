@@ -23,6 +23,13 @@ public class MovementSystem : MonoBehaviour
         ObjRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
 
+    public void AddSubToYAxis(Rigidbody2D ObjRB, float ySpeed, bool goUP)
+    {
+        if (goUP)
+            ObjRB.AddForce(Vector2.up * ySpeed * Time.deltaTime, ForceMode2D.Force);
+        else
+            ObjRB.AddForce(Vector2.down * ySpeed * Time.deltaTime, ForceMode2D.Force);
+    }
 
 
 }

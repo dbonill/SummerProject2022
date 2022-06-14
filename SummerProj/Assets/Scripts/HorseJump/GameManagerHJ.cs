@@ -16,6 +16,7 @@ public struct Obstacles
 public class GameManagerHJ : MonoBehaviour
 {
     public bool GameOver = false;
+    public GameObject ObjectParent;
 
     [Header("Obstacles")]
     public float startSpawnObstacle = 1f;
@@ -106,6 +107,7 @@ public class GameManagerHJ : MonoBehaviour
         {
             var go = Instantiate(ObstaclesToSpawn[indexToSpawn].Obstacle, SpawnPoints[0].position, Quaternion.identity);
             go.GetComponent<MovementSystem>().speed = ObstaclesToSpawn[indexToSpawn].Speed * speedMultiplyerBonus;
+            go.transform.SetParent(ObjectParent.transform);
         }
 
     }

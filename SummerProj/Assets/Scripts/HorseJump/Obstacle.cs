@@ -19,7 +19,8 @@ public class Obstacle : MovementSystem
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject, destroyObjAfterXSeconds);
+        if(collision.gameObject.CompareTag("Score"))
+            Destroy(gameObject, destroyObjAfterXSeconds);
     }
 
 }

@@ -76,6 +76,9 @@ public class HorseControls : MovementSystem
     }
 
 
+    
+
+
     // Update is called once per frame
     void Update()
     {
@@ -95,10 +98,12 @@ public class HorseControls : MovementSystem
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            GameManager.EndGame();
             anim.SetBool("Dead", true);
+            GameManager.EndGame();
         }
     }
+
+  
 
 
 }

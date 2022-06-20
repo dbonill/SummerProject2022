@@ -74,6 +74,7 @@ public class GameManagerHJ : MonoBehaviour
 
     public void ResetGame()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(LoadSceneOnGameOver);
     }
 

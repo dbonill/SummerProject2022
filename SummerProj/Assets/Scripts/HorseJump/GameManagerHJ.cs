@@ -133,7 +133,7 @@ public class GameManagerHJ : MonoBehaviour
     void Start()
     {
         spawnObstacleTimer = startSpawnObstacle;
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
     }
 
     // Update is called once per frame

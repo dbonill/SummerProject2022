@@ -17,6 +17,8 @@ public class HorseControls : MovementSystem
 
     public GameManagerHJ GameManager;
 
+    public Animator anim;
+
 
 
     // Start is called before the first frame update
@@ -47,12 +49,38 @@ public class HorseControls : MovementSystem
             jumpCoolDownTimer -= Time.deltaTime;
     }
 
+    //booleans for animations
+    bool endTransitionFunc = false;
+    bool falling = false;
+    void AnimationBoolsAndFloats()
+    {
+
+        //falling bool
+        if (rb.velocity.y < 0)
+            falling = true;
+        else
+            falling = false;
+
+        anim.SetBool("Falling", falling);
+
+        //set animation bool
+        anim.SetBool("Grounded", isGrounded);
+
+        if (endTransitionFunc)
+            return;
+        if (GameManager.startGame)
+        {
+            anim.SetBool("StartGame", true);
+            endTransitionFunc = true;
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
     {
         checkIfGrounded();
-
+        AnimationBoolsAndFloats();
         if ((Input.touchCount > 0 || Input.GetKeyDown(Jump)) && isGrounded && GameManager.startGame && jumpCoolDownTimer <= 0)
         {
             ObjImpulseUp(rb, jumpForce);
@@ -65,8 +93,11 @@ public class HorseControls : MovementSystem
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
             GameManager.EndGame();
+            anim.SetBool("Dead", true);
+        }
     }
 
 

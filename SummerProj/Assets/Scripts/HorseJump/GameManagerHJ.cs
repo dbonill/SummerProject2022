@@ -53,6 +53,96 @@ public class GameManagerHJ : MonoBehaviour
     public string LoadSceneOnGameOver;
 
 
+    //working on this rn
+    [Header("Cloud/Boulder Spawns")]
+    public List<GameObject> Clouds;
+    public List<GameObject> Boulders;
+    public List<Transform> CloudSpawnPos; //2 positions only one for bottom and top range
+    public Transform BoulderSpawn; //its just one position
+    public Transform CloudUIParent;
+    public Transform BoulderUIParent;
+    public float spawnCloudIntervalStart = 2;
+    public float spawnCloudIntervalEnd = 3;
+    private float nextTimeToSpawnCloud = 3;
+
+    public float spawnBoulderIntervalStart = 2;
+    public float spawnBoulderIntervalEnd = 3;
+    private float nextTimeToSpawnBoulder = 3;
+
+    public void spawnCloud()
+    {
+        int indexOfCloud = Random.Range(0, Clouds.Count);
+        float newY = Random.Range(CloudSpawnPos[0].position.y, CloudSpawnPos[1].position.y);
+        Vector3 posToSpawn = new Vector3(CloudSpawnPos[0].position.x, newY, 0);
+
+        //int flipX = Random.Range(0, 2);
+
+
+        var cloud = Instantiate(Clouds[indexOfCloud], posToSpawn, Quaternion.identity);
+
+        /*
+         * just going to make extra prefabs that have them fliped already
+         * 
+        if (flipX > 0)
+        {
+            cloud.transform.localScale = new Vector3(cloud.transform.localScale.x * -1, cloud.transform.localScale.y, cloud.transform.localScale.z);
+        }
+        */
+
+        cloud.transform.SetParent(CloudUIParent);
+        cloud.transform.localScale = new Vector3(1, 1, 1);
+
+        nextTimeToSpawnCloud = Random.Range(spawnCloudIntervalStart, spawnCloudIntervalEnd);
+    }
+
+    public void spawnBoulder()
+    {
+        int indexOfBoulder = Random.Range(0, Boulders.Count);
+        //float newY = Random.Range(CloudSpawnPos[0].position.y, CloudSpawnPos[1].position.y);
+        //Vector3 posToSpawn = new Vector3(CloudSpawnPos[0].position.x, newY, 0);
+
+        //int flipX = Random.Range(0, 2);
+
+
+        var boulder = Instantiate(Boulders[indexOfBoulder], BoulderSpawn.position, Quaternion.identity);
+
+        /*
+         * just going to make extra prefabs that have them fliped already
+         * 
+        if (flipX > 0)
+        {
+            cloud.transform.localScale = new Vector3(cloud.transform.localScale.x * -1, cloud.transform.localScale.y, cloud.transform.localScale.z);
+        }
+        */
+
+        boulder.transform.SetParent(BoulderUIParent);
+        boulder.transform.localScale = new Vector3(1, 1, 1);
+        nextTimeToSpawnBoulder = Random.Range(spawnBoulderIntervalStart, spawnBoulderIntervalEnd);
+    }
+
+    public void BackGroundObjectSpawner()
+    {
+        if (startGame)
+        {
+            //do boulder spawns
+            if (nextTimeToSpawnBoulder > 0)
+                nextTimeToSpawnBoulder -= Time.deltaTime;
+            else
+                spawnBoulder();
+        }
+
+        //cloud spawns are always on
+
+        if (nextTimeToSpawnCloud > 0)
+            nextTimeToSpawnCloud -= Time.deltaTime;
+        else
+            spawnCloud();
+
+    }
+
+
+
+
     //Start/End/Reset Game
     public bool startGame = false;
 
@@ -134,6 +224,9 @@ public class GameManagerHJ : MonoBehaviour
     void Start()
     {
         spawnObstacleTimer = startSpawnObstacle;
+
+        //make it where boulder and clouds spawn
+
         //Time.timeScale = 0f;
     }
 
@@ -146,6 +239,9 @@ public class GameManagerHJ : MonoBehaviour
             timeSurvived += Time.deltaTime;
             ObstacleSpawnTimers();
         }
+
+        BackGroundObjectSpawner();
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -20,7 +20,6 @@ public class HorseControls : MovementSystem
     public Animator anim;
 
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -89,7 +88,8 @@ public class HorseControls : MovementSystem
             ObjImpulseUp(rb, jumpForce);
             ResetJumpCoolDown();
         }
-        SubtractJumpCoolDownTimers();
+        if(GameManager.startGame)
+            SubtractJumpCoolDownTimers();
 
 
     }

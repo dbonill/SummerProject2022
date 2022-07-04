@@ -75,22 +75,18 @@ public class GameManagerHJ : MonoBehaviour
         float newY = Random.Range(CloudSpawnPos[0].position.y, CloudSpawnPos[1].position.y);
         Vector3 posToSpawn = new Vector3(CloudSpawnPos[0].position.x, newY, 0);
 
-        //int flipX = Random.Range(0, 2);
+        int flipX = Random.Range(0, 2);
 
 
         var cloud = Instantiate(Clouds[indexOfCloud], posToSpawn, Quaternion.identity);
+        
 
-        /*
-         * just going to make extra prefabs that have them fliped already
-         * 
+        cloud.transform.SetParent(CloudUIParent);
+        cloud.transform.localScale = new Vector3(1, 1, 1);
         if (flipX > 0)
         {
             cloud.transform.localScale = new Vector3(cloud.transform.localScale.x * -1, cloud.transform.localScale.y, cloud.transform.localScale.z);
         }
-        */
-
-        cloud.transform.SetParent(CloudUIParent);
-        cloud.transform.localScale = new Vector3(1, 1, 1);
 
         nextTimeToSpawnCloud = Random.Range(spawnCloudIntervalStart, spawnCloudIntervalEnd);
     }
@@ -101,22 +97,21 @@ public class GameManagerHJ : MonoBehaviour
         //float newY = Random.Range(CloudSpawnPos[0].position.y, CloudSpawnPos[1].position.y);
         //Vector3 posToSpawn = new Vector3(CloudSpawnPos[0].position.x, newY, 0);
 
-        //int flipX = Random.Range(0, 2);
+        int flipX = Random.Range(0, 2);
 
 
         var boulder = Instantiate(Boulders[indexOfBoulder], BoulderSpawn.position, Quaternion.identity);
-
-        /*
-         * just going to make extra prefabs that have them fliped already
-         * 
-        if (flipX > 0)
-        {
-            cloud.transform.localScale = new Vector3(cloud.transform.localScale.x * -1, cloud.transform.localScale.y, cloud.transform.localScale.z);
-        }
-        */
+        
+        
 
         boulder.transform.SetParent(BoulderUIParent);
         boulder.transform.localScale = new Vector3(1, 1, 1);
+        if (flipX > 0)
+        {
+            boulder.transform.localScale = new Vector3(boulder.transform.localScale.x * -1, boulder.transform.localScale.y, boulder.transform.localScale.z);
+        }
+
+
         nextTimeToSpawnBoulder = Random.Range(spawnBoulderIntervalStart, spawnBoulderIntervalEnd);
     }
 
@@ -129,14 +124,15 @@ public class GameManagerHJ : MonoBehaviour
                 nextTimeToSpawnBoulder -= Time.deltaTime;
             else
                 spawnBoulder();
+
+            if (nextTimeToSpawnCloud > 0)
+                nextTimeToSpawnCloud -= Time.deltaTime;
+            else
+                spawnCloud();
+
         }
 
-        //cloud spawns are always on
-
-        if (nextTimeToSpawnCloud > 0)
-            nextTimeToSpawnCloud -= Time.deltaTime;
-        else
-            spawnCloud();
+        
 
     }
 
@@ -193,6 +189,7 @@ public class GameManagerHJ : MonoBehaviour
         {
             var go = Instantiate(ObstaclesToSpawn[indexToSpawn].Obstacle, SpawnPoints[1].position, Quaternion.identity);
             go.GetComponent<MovementSystem>().speed = ObstaclesToSpawn[indexToSpawn].Speed * speedMultiplyerBonus;
+            go.transform.SetParent(ObjectParent.transform);
         }
         else
         {

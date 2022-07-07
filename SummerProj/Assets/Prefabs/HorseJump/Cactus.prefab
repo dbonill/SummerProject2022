@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 145e33a0b35c3f3439c7a2943bfacb50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 12
   rb: {fileID: 2707258957965177077}
-  destroyObjAfterXSeconds: 1
+  destroyObjAfterXSeconds: 2
 --- !u!50 &2707258957965177077
 Rigidbody2D:
   serializedVersion: 4

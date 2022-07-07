@@ -9,6 +9,7 @@ public class BackgroundObjects : MovementSystem
     {
         if (ObjectLifeTime > 0)
         {
+            //should be in fixed update
             TranslateObjToLeft(transform);
         }
         else
@@ -16,12 +17,17 @@ public class BackgroundObjects : MovementSystem
             Destroy(this.gameObject);
         }
 
-        ObjectLifeTime -= Time.deltaTime;
+        
+    }
+
+    private void FixedUpdate()
+    {
+        objectLife();
     }
 
     // Update is called once per frame
     void Update()
     {
-        objectLife();
+        ObjectLifeTime -= Time.deltaTime;
     }
 }

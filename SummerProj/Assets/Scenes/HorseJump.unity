@@ -3299,6 +3299,24 @@ MonoBehaviour:
     pitch: 0.9
     loop: 0
     source: {fileID: 0}
+  - name: Coin1
+    clip: {fileID: 8300000, guid: 29fdb44e5891e9f4795dd7901e5f2486, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Coin2
+    clip: {fileID: 8300000, guid: b2d0b09a3c32eca499161129a2626a67, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Coin3
+    clip: {fileID: 8300000, guid: baefc95dd29c7cc4c9c479cb6f6d4b8a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   MusicLevelOne:
   - name: 
     clip: {fileID: 0}

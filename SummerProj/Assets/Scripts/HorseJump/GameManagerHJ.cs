@@ -247,6 +247,7 @@ public class GameManagerHJ : MonoBehaviour
         {
             CurrentScore++;
             ScoreText.text = "SCORE: " + CurrentScore;
+            AudioManager.instance.PlayEffect("Coin1");
         }
     }
 

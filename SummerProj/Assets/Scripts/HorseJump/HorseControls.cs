@@ -32,9 +32,28 @@ public class HorseControls : MovementSystem
     }
 
 
+    private bool playLandingSound = false;
+    private float timeToPlayWalkSound = 0.25f;
+    private float keepTrackOfSoundTime = 0.25f;
     void checkIfGrounded()
     {
         isGrounded = Physics2D.Raycast(transform.position, groundChecker.position - transform.position, distance, Ground);
+
+        if (!isGrounded)
+            playLandingSound = true;
+        else if(playLandingSound == true && isGrounded)
+        {
+            AudioManager.instance.PlayEffect("Land");
+            playLandingSound = false;
+        }
+
+        if (isGrounded && GameManager.startGame && keepTrackOfSoundTime <= 0)
+        {
+            AudioManager.instance.playPlayerSteps();
+            keepTrackOfSoundTime = timeToPlayWalkSound;
+        }
+        keepTrackOfSoundTime -= Time.deltaTime;
+
     }
 
     void ResetJumpCoolDown()
@@ -86,6 +105,7 @@ public class HorseControls : MovementSystem
         if ((Input.touchCount > 0 || Input.GetKeyDown(Jump)) && isGrounded && GameManager.startGame && jumpCoolDownTimer <= 0)
         {
             ObjImpulseUp(rb, jumpForce);
+            AudioManager.instance.PlayEffect("Jump");
             ResetJumpCoolDown();
         }
         if(GameManager.startGame)
@@ -99,6 +119,7 @@ public class HorseControls : MovementSystem
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             anim.SetBool("Dead", true);
+            AudioManager.instance.PlayEffect("Die");
             GameManager.EndGame();
         }
     }

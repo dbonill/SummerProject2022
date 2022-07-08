@@ -148,6 +148,8 @@ public class GameManagerHJ : MonoBehaviour
         startButton.SetActive(false);
         nameOfMiniGame.SetActive(false);
         startGame = true;
+        AudioManager.instance.StopAllAudio();
+        AudioManager.instance.playRandomTrackLevel1();
     }
 
     public void EndGame()
@@ -221,10 +223,8 @@ public class GameManagerHJ : MonoBehaviour
     void Start()
     {
         spawnObstacleTimer = startSpawnObstacle;
-
-        //make it where boulder and clouds spawn
-
-        //Time.timeScale = 0f;
+        AudioManager.instance.StopAllAudio();
+        AudioManager.instance.PlayMusic("Wholesome");
     }
 
     // Update is called once per frame

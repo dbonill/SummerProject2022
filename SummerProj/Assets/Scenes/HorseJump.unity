@@ -3231,6 +3231,138 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1994206637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1994206639}
+  - component: {fileID: 1994206638}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1994206638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994206637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfed857bf7280f24084390cc7b4a182f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MusicVolume: {fileID: -2275854738083461445, guid: a252b697da1bcf3499c58299d787b5bd, type: 2}
+  SoundEffectVolume: {fileID: 4311255460663970983, guid: a252b697da1bcf3499c58299d787b5bd, type: 2}
+  SoundEffects:
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: 7f099ae3678e25c428cb8f34a213e36d, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Land
+    clip: {fileID: 8300000, guid: a8fc8aa3b8a47a64eb48bee46c9847dc, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Die
+    clip: {fileID: 8300000, guid: 748bfaff907ecaa4b9ead1b20071465f, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Step1
+    clip: {fileID: 8300000, guid: e24784310338a2d46987afc27827bc62, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Step2
+    clip: {fileID: 8300000, guid: e24784310338a2d46987afc27827bc62, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+  MusicLevelOne:
+  - name: 
+    clip: {fileID: 0}
+    volume: 0
+    pitch: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Blip Stream
+    clip: {fileID: 8300000, guid: 9b25c2b5f22430e49ad8276da2548dd0, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Fuzzball Parade
+    clip: {fileID: 8300000, guid: 2c655c997c18e4740b19f8b12ac414e2, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Onion Capers
+    clip: {fileID: 8300000, guid: 76609180926508b448ac2583561b0179, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Quirky Dog
+    clip: {fileID: 8300000, guid: d67990104c353a34b9fdeafe19ce6671, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Upbeat Forever
+    clip: {fileID: 8300000, guid: 05a211aa8f7ed8a40809033a73c54ca0, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Wholesome
+    clip: {fileID: 8300000, guid: e2b8ea24a02186646b8b946f8d8c800a, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  levelOneChoices:
+  - Blip Stream
+  - Fuzzball Parade
+  - Onion Capers
+  - Quirky Dog
+  - Upbeat Forever
+--- !u!4 &1994206639
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994206637}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.28620952, y: -2.0353825, z: -10.081706}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2037000627
 GameObject:
   m_ObjectHideFlags: 0

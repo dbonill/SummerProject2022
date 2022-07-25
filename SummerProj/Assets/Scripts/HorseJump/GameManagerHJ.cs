@@ -256,6 +256,7 @@ public class GameManagerHJ : MonoBehaviour
     public int highestScore; //used for save and pull from saves
     private void Awake() //handle loading
     {
+        /* THIS DOESN'T WORK FOR MOBILE
         SaveGame.Init();
         string saveString = SaveGame.Load();
         if (saveString != null)
@@ -271,6 +272,7 @@ public class GameManagerHJ : MonoBehaviour
             highestScore = 0;
             Debug.Log("No Save");
         }
+        */
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

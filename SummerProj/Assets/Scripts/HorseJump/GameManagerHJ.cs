@@ -35,6 +35,7 @@ public class GameManagerHJ : MonoBehaviour
 
     [Header("Score")]
     public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI HighScoreText;
     public int CurrentScore = 0;
     public float timeSurvived = 0f;
 
@@ -158,6 +159,16 @@ public class GameManagerHJ : MonoBehaviour
         restartButton.SetActive(true);
         gameOverText.SetActive(true);
         GameOver = true;
+
+        if (CurrentScore > highestScore)
+        {
+            SaveObject save = new SaveObject{highestScore = CurrentScore};
+
+            string json = JsonUtility.ToJson(save);
+            SaveGame.Save(json);
+            Debug.Log("SAVED");
+        }
+
     }
 
     public void ResetGame()
@@ -239,6 +250,27 @@ public class GameManagerHJ : MonoBehaviour
 
         BackGroundObjectSpawner();
 
+    }
+
+
+    public int highestScore; //used for save and pull from saves
+    private void Awake() //handle loading
+    {
+        SaveGame.Init();
+        string saveString = SaveGame.Load();
+        if (saveString != null)
+        {
+            SaveObject save = JsonUtility.FromJson<SaveObject>(saveString);
+
+            highestScore = save.highestScore;
+            HighScoreText.text = "HIGH SCORE: " + highestScore.ToString();
+
+        }
+        else
+        {
+            highestScore = 0;
+            Debug.Log("No Save");
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
